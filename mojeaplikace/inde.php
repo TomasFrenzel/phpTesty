@@ -34,14 +34,5 @@
         <input type="password"placeholder="heslo" name="password"><br>
         <input type="submit" name="submit"value="Odelsat">
     </form>
-    <?php
-        while($row = mysqli_fetch_assoc($result)){
-            echo "<pre>";
-            print_r($row);
-            echo "</pre>";
-        }
-    
-    
-    ?>
 </body>
 </html>
