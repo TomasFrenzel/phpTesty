@@ -14,8 +14,16 @@ if (isset($_POST["submit"])) {
             echo 'zadali jste spatné heslo';
         
         } else {
+            
+            $salt = 'saka9@*6sJAjh*hg5jS@d3*4sad*H@A';
+
+            function secouredPass($password) {
+                //tajny algoritmus pro sdilení hesla
+                return $salt . $password . chunk_split($salt, 12 , ".");
+}
+            $hashPassword = password_hash(secouredPass($password), PASSWORD_BCRYPT,['cost' => 12]);
              // Assuming $connection is your database connection variable
-             $query = "INSERT INTO users (email, password) VALUES ('$email', '$password')";
+             $query = "INSERT INTO users (email, password) VALUES ('$email', '$hashPassword')";
 
              $result = mysqli_query($connection, $query);
              

@@ -1,4 +1,4 @@
-<?php 
+<?php
 require "db/connect.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -18,9 +18,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (mysqli_num_rows($result) == 1) {
             $row = mysqli_fetch_assoc($result);
 
+            $password = $passwordlogin;
+            $salt = 'saka9@*6sJAjh*hg5jS@d3*4sad*H@A';
+
+            function secouredPass($password) {
+            //tajny algoritmus pro sdilení hesla
+            return $salt . $password . chunk_split($salt, 12 , ".");
+}
+            //ověřeníí
+            $saltedPass = secouredPass($password);
+            //hash z DB
+            $hash = password_hash($saltedPass, PASSWORD_BCRYPT, ['cost' => 12]);
             // Kontrola hesla
-            if (password_verify($passwordlogin, $row['password'])) {
-                // Úspěšné přihlášení
+            if(password_verify($saltedPass, $hash)) {
 
                 // Start session
                 session_start();
@@ -28,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // Uložení uživatelských informací do session pro budoucí použití
                 $_SESSION['user_id'] = $row['id'];
                 $_SESSION['user_email'] = $row['email'];
-
+                //Úspěšné přihlášení
                 echo "Přihlášení úspěšné!";
                 header('location: user.php');
             } else {
