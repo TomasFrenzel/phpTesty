@@ -20,5 +20,7 @@ include "db/register.php";
         <input type="password"placeholder="znova heslo" name="password2"><br>
         <input type="submit" name="submit"value="Odelsat">
     </form>
+
+    <a href="login.php"><button type="button">Login</button> </a>
 </body>
 </html>
