@@ -6,10 +6,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $passwordlogin = $_POST["password"];
 
     // Zabezpečení proti SQL injection pomocí připraveného dotazu
-    $query = "SELECT * FROM users WHERE email=?";
+    $query = "SELECT * FROM users WHERE email='" . $emailLogin . "'";    
+    echo $query;
     
     $stmt = mysqli_prepare($connection, $query);
-    mysqli_stmt_bind_param($stmt, "s", $emailLogin);
+   // mysqli_stmt_bind_param($stmt, "s", $emailLogin);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
 
@@ -18,19 +19,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (mysqli_num_rows($result) == 1) {
             $row = mysqli_fetch_assoc($result);
 
+            $query = "SELECT * FROM users WHERE pass='" . $passwordlogin "'"; 
+            $datheslo =
+
             $password = $passwordlogin;
             $salt = 'saka9@*6sJAjh*hg5jS@d3*4sad*H@A';
 
             function secouredPass($password) {
             //tajny algoritmus pro sdilení hesla
-            return $salt . $password . chunk_split($salt, 12 , ".");
+            return $salt . $password . chunk_split($salt , 12 , ".");
 }
             //ověřeníí
             $saltedPass = secouredPass($password);
             //hash z DB
             $hash = password_hash($saltedPass, PASSWORD_BCRYPT, ['cost' => 12]);
             // Kontrola hesla
-            if(password_verify($saltedPass, $hash)) {
+            if(password_verify($saltedPass, $)) {
 
                 // Start session
                 session_start();

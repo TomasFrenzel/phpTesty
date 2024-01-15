@@ -18,12 +18,12 @@ if (isset($_POST["submit"])) {
             $salt = 'saka9@*6sJAjh*hg5jS@d3*4sad*H@A';
 
             function secouredPass($password) {
-                //tajny algoritmus pro sdilení hesla
+                //algoritmus hesla
                 return $salt . $password . chunk_split($salt, 12 , ".");
 }
             $hashPassword = password_hash(secouredPass($password), PASSWORD_BCRYPT,['cost' => 12]);
-             // Assuming $connection is your database connection variable
-             $query = "INSERT INTO users (email, password) VALUES ('$email', '$hashPassword')";
+             // 
+             $query = "INSERT INTO users (email, pass) VALUES ('$email', '$hashPassword')";
 
              $result = mysqli_query($connection, $query);
              
