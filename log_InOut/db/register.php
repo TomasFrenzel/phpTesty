@@ -13,6 +13,7 @@ if (isset($_POST["submit"])) {
 
             echo 'zadali jste spatné heslo';
         
+            
         } else {
             
             $salt = 'saka9@*6sJAjh*hg5jS@d3*4sad*H@A';

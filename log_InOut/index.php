@@ -1,8 +1,10 @@
 <?php 
+$list = "Registrace";
 include "db/connect.php";
 
 //REGISTER
 include "db/register.php";
+
 
 ?>
 

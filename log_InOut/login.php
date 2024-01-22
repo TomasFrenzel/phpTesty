@@ -1,5 +1,6 @@
 <?php
 //Header
+$list ="přihlášení";
 include "template/templateHeader.php";
 //Připojení
 include "db/connect.php";

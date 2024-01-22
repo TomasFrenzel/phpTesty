@@ -6,7 +6,7 @@ echo "<!DOCTYPE html>
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <link rel='stylesheet' href='../css/styles.css'>
-    <title>Bezpečne na netu</title>
+    <title>Bezpečne na netu | $list </title>
 </head>
 <body>
     
