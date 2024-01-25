@@ -8,10 +8,11 @@ if (isset($_POST["submit"])) {
         $email = $_POST["email"];
         $password = $_POST["password"];
         $password2 = $_POST["password2"];
+        $username = $_POST["username"];
 
         if (!($password == $password2)) {
 
-            echo 'zadali jste spatné heslo';
+            echo 'Jendo z vaších zadaných hesel se neshoduje';
         
             
         } else {
@@ -24,7 +25,7 @@ if (isset($_POST["submit"])) {
 }
             $hashPassword = password_hash(secouredPass($password), PASSWORD_BCRYPT,['cost' => 12]);
              // 
-             $query = "INSERT INTO users (email, pass) VALUES ('$email', '$hashPassword')";
+             $query = "INSERT INTO users (email, pass, username) VALUES ('$email', '$hashPassword', '$username')";
 
              $result = mysqli_query($connection, $query);
              

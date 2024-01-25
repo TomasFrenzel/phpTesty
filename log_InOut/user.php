@@ -1,14 +1,17 @@
 <?php
-
+session_start();
 $list = "testy";
+require_once "db/connect.php";
+$username = $_SESSION["username"];
+$email = $_SESSION["email"];
 
-include "template/templateHeader.php";
+require_once "template/templateHeader.php";
 /*databaze bude obsahovat users a bude obsahovat jmeno users
 *z nastavení a bude tam vytahovat. 
 *
 */ 
-include ""
 
+echo 'Email uživatele '. $_SESSION["email"];
 
 
 

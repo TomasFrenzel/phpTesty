@@ -20,6 +20,7 @@ include "db/register.php";
         <input type="email"placeholder="Email" name="email"><br>
         <input type="password"placeholder="heslo" name="password"><br>
         <input type="password"placeholder="znova heslo" name="password2"><br>
+        <input type="text" name="username" placeholder="username">
         <input type="submit" name="submit"value="Odelsat">
     </form>
 

@@ -1,5 +1,7 @@
 <?php
-require "db/connect.php";
+require_once "db/connect.php";
+
+session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
@@ -7,9 +9,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Zabezpečení proti SQL injection pomocí připraveného dotazu
     $query = "SELECT * FROM users WHERE email='" . $email . "'";    
-    echo $query;
+    
     $result = mysqli_query($connection, $query);
-    var_dump($result);
+    
 
     if ($result) {
         // Kontrola, zda byl vrácen nějaký záznamu
@@ -17,7 +19,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             while($row = mysqli_fetch_assoc($result)){
             $passDat=$row["pass"];
-            echo $passDat;
+            
+            //session email a id a username 
+            $_SESSION["email"] = $row["email"];
+            $_SESSION["ID"] = $row["id"];
+            $_SESSION["username"] = $row["username"];
             }
             
             //salt
@@ -28,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 return $salt . $password . chunk_split($salt, 12 , ".");
             }
             $hashPassword = password_hash(secouredPass($password), PASSWORD_BCRYPT,['cost' => 12]);
-            echo $hashPassword;
+            
 
 
 
@@ -37,7 +43,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
            if (password_verify(secouredPass($password), $passDat)){
                 echo "Jste přihlášen";
             
-            //header('location: user.php');
+            //otevře user.php
+          
+            header('location: user.php');
+
+
             }else {
                 echo "špatné heslo jste zadal";
             }
